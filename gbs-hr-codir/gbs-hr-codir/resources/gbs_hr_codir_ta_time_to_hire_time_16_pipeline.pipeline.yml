@@ -1,0 +1,24 @@
+# SDP pipeline for scenario "TA Time to Hire & Time to Shortlist".
+resources:
+  pipelines:
+    gbs_hr_codir_ta_time_to_hire_time_16_pipeline:
+      name: gbs-hr-codir-ta-time-to-hire-time
+      catalog: ${var.catalog}
+      schema: brz
+      serverless: true
+      photon: true
+      channel: CURRENT
+      continuous: false
+      configuration:
+        # Column names are preserved verbatim (spaces, punctuation, pivot modalities like
+        # `Deposit Account_revenue_avg`); enable Delta column mapping on every table the pipeline creates so
+        # those names are valid (else DELTA_INVALID_CHARACTERS_IN_COLUMN_NAMES on a non-mapped table).
+        spark.databricks.delta.properties.defaults.columnMapping.mode: name
+      root_path: ../transformations/ta_time_to_hire_time_to_shortlist
+      libraries:
+        - glob:
+            include: ../transformations/ta_time_to_hire_time_to_shortlist/**
+      tags:
+        source: dataiku-migration
+        programme: gbs_hr_codir
+        scenario: ta_time_to_hire_time_to_shortlist

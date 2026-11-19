@@ -1,0 +1,24 @@
+# SDP pipeline for scenario "Payroll KPIs Touchless & compliance rate".
+resources:
+  pipelines:
+    gbs_hr_codir_payr_kpis_touc_14_pipeline:
+      name: gbs-hr-codir-payr-kpis-touc
+      catalog: ${var.catalog}
+      schema: raw_data
+      serverless: true
+      photon: true
+      channel: CURRENT
+      continuous: false
+      configuration:
+        # Column names are preserved verbatim (spaces, punctuation, pivot modalities like
+        # `Deposit Account_revenue_avg`); enable Delta column mapping on every table the pipeline creates so
+        # those names are valid (else DELTA_INVALID_CHARACTERS_IN_COLUMN_NAMES on a non-mapped table).
+        spark.databricks.delta.properties.defaults.columnMapping.mode: name
+      root_path: ../transformations/payroll_kpis_touchless_compliance_rate
+      libraries:
+        - glob:
+            include: ../transformations/payroll_kpis_touchless_compliance_rate/**
+      tags:
+        source: dataiku-migration
+        programme: gbs_hr_codir
+        scenario: payroll_kpis_touchless_compliance_rate

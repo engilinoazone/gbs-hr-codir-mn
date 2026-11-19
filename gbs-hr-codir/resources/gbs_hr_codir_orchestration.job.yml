@@ -1,0 +1,30 @@
+# Orchestration job: runs the pipeline + script units in dependency order.
+resources:
+  jobs:
+    gbs_hr_codir_orchestration:
+      name: gbs-hr-codir-orchestration
+      tags:
+        source: dataiku-migration
+        programme: gbs_hr_codir
+      tasks:
+        - task_key: gbs_hr_codir_ta_requ_data_5_pipeline
+          pipeline_task:
+            pipeline_id: ${resources.pipelines.gbs_hr_codir_ta_requ_data_5_pipeline.id}
+        - task_key: gbs_hr_codir_ta_jobr_hist_data_7_pipeline
+          pipeline_task:
+            pipeline_id: ${resources.pipelines.gbs_hr_codir_ta_jobr_hist_data_7_pipeline.id}
+          depends_on:
+            - task_key: gbs_hr_codir_ta_requ_data_5_pipeline
+        - task_key: gbs_hr_codir_ta_funn_final_9_pipeline
+          pipeline_task:
+            pipeline_id: ${resources.pipelines.gbs_hr_codir_ta_funn_final_9_pipeline.id}
+          depends_on:
+            - task_key: gbs_hr_codir_ta_requ_data_5_pipeline
+        - task_key: gbs_hr_codir_ta_appl_final_10_pipeline
+          pipeline_task:
+            pipeline_id: ${resources.pipelines.gbs_hr_codir_ta_appl_final_10_pipeline.id}
+          depends_on:
+            - task_key: gbs_hr_codir_ta_requ_data_5_pipeline
+        - task_key: gbs_hr_codir_cm_holi_2_11_pipeline
+          pipeline_task:
+            pipeline_id: ${resources.pipelines.gbs_hr_codir_cm_holi_2_11_pipeline.id}

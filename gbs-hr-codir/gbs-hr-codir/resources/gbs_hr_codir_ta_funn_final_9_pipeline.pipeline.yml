@@ -1,0 +1,24 @@
+# SDP pipeline for scenario "TA Funnel Final".
+resources:
+  pipelines:
+    gbs_hr_codir_ta_funn_final_9_pipeline:
+      name: gbs-hr-codir-ta-funn-final
+      catalog: ${var.catalog}
+      schema: raw_data
+      serverless: true
+      photon: true
+      channel: CURRENT
+      continuous: false
+      configuration:
+        # Column names are preserved verbatim (spaces, punctuation, pivot modalities like
+        # `Deposit Account_revenue_avg`); enable Delta column mapping on every table the pipeline creates so
+        # those names are valid (else DELTA_INVALID_CHARACTERS_IN_COLUMN_NAMES on a non-mapped table).
+        spark.databricks.delta.properties.defaults.columnMapping.mode: name
+      root_path: ../transformations/ta_funnel_final
+      libraries:
+        - glob:
+            include: ../transformations/ta_funnel_final/**
+      tags:
+        source: dataiku-migration
+        programme: gbs_hr_codir
+        scenario: ta_funnel_final

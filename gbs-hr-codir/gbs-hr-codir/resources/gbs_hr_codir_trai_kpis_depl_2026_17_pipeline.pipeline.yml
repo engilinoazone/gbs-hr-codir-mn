@@ -1,0 +1,24 @@
+# SDP pipeline for scenario "Training KPIs Deployment 2026".
+resources:
+  pipelines:
+    gbs_hr_codir_trai_kpis_depl_2026_17_pipeline:
+      name: gbs-hr-codir-trai-kpis-depl-2026
+      catalog: ${var.catalog}
+      schema: brz
+      serverless: true
+      photon: true
+      channel: CURRENT
+      continuous: false
+      configuration:
+        # Column names are preserved verbatim (spaces, punctuation, pivot modalities like
+        # `Deposit Account_revenue_avg`); enable Delta column mapping on every table the pipeline creates so
+        # those names are valid (else DELTA_INVALID_CHARACTERS_IN_COLUMN_NAMES on a non-mapped table).
+        spark.databricks.delta.properties.defaults.columnMapping.mode: name
+      root_path: ../transformations/training_kpis_deployment_2026
+      libraries:
+        - glob:
+            include: ../transformations/training_kpis_deployment_2026/**
+      tags:
+        source: dataiku-migration
+        programme: gbs_hr_codir
+        scenario: training_kpis_deployment_2026
