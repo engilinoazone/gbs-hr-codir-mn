@@ -1,5 +1,6 @@
-CREATE OR REFRESH STREAMING TABLE `raw_data`.`bronze_ds_deploiement_for_KPI_V2_2026`
+CREATE OR REFRESH STREAMING TABLE `gbshr_training_dev`.`brz`.`fr_deploiement_for_kpi_v2_2026`
 COMMENT 'Auto Loader ingestion from Dataiku source ds_deploiement_for_KPI_V2_2026'
+TBLPROPERTIES ('delta.columnMapping.mode' = 'name')
 AS
 SELECT
   * EXCEPT (

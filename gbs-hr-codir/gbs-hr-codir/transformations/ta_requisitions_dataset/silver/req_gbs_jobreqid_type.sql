@@ -2,6 +2,7 @@
 CREATE OR REFRESH MATERIALIZED VIEW `raw_data`.`silver_req_gbs_jobreqid_type`
 COMMENT 'Migrated from Dataiku (REQ_GBS_jobreqid_type)'
 AS
+
 -- Dataiku shaker `compute_REQ_GBS_jobreqid_type`: no enabled Prepare steps; apply declared output type and column names
 SELECT
   CAST(`Job Req ID` AS INT) AS `Job Req ID`,
@@ -45,6 +46,6 @@ SELECT
   `JobRequisition_jobCode`,
   `JobRequisition_evergreen`,
   `ENGIEJOB_LABEL`,
-  `Recruiter GID`,
+  `Recruiter_GID` AS `Recruiter GID`,
   `Build_Date`
 FROM `raw_data`.`bronze_req_gbs`;

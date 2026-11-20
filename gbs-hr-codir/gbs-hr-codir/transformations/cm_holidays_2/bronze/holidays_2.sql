@@ -1,9 +1,7 @@
 -- Migrated from Dataiku: compute_holidays_prepared_1
--- Target realigned on the registered output of this step (slv.bronze_holidays_2).
--- The "bronze_" prefix is knowingly not the ideal medallion layer for a filtered dataset; the user accepts it
--- and will rename it later directly in the pipelines, so that code and plan metadata stay consistent.
--- Input stays STREAM(brz.bronze_holidays_1) (ingested append-only source => streaming table).
-CREATE OR REFRESH STREAMING TABLE `slv`.`bronze_holidays_2`
+-- Target realigned on the registered output of this step (gbshr_reference_dev.slv.gbl_holidays_2).
+-- Input stays STREAM(gbshr_reference_dev.brz.gbl_holidays_1) (ingested append-only source => streaming table).
+CREATE OR REFRESH STREAMING TABLE `gbshr_reference_dev`.`slv`.`gbl_holidays_2`
 COMMENT 'Migrated from Dataiku (holidays_2)'
 AS
 -- Dataiku shaker `compute_holidays_prepared_1`: parse Date, filter global public holidays, select and rename output columns
@@ -17,6 +15,6 @@ AS
 SELECT
   `CountryCode` AS `Country`,
   to_date(`Date`, 'MM/dd/yy') AS `Date`
-FROM STREAM(`brz`.`bronze_holidays_1`)
+FROM STREAM(`gbshr_reference_dev`.`brz`.`gbl_holidays_1`)
 WHERE `Global` = 'True'
   AND `Type` = 'Public';

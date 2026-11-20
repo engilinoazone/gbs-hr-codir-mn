@@ -1,4 +1,4 @@
-CREATE OR REFRESH STREAMING TABLE `brz`.`bronze_holidays_1`
+CREATE OR REFRESH STREAMING TABLE `gbshr_reference_dev`.`brz`.`gbl_holidays_1`
 COMMENT 'Auto Loader ingestion from Dataiku source holidays_1'
 AS SELECT
   *,

@@ -1,5 +1,6 @@
 CREATE OR REFRESH STREAMING TABLE `brz`.`bronze_pdc_consolide`
 COMMENT 'Auto Loader ingestion from Dataiku source PDC_consolide'
+TBLPROPERTIES ('delta.columnMapping.mode' = 'name')
 AS
 SELECT
   *,

@@ -6,9 +6,9 @@
 --   compute_Final_dataset_TTH_and_TTS
 --
 -- Target:
---   gld.bronze_final_dataset_tth_and_tts
+--   gbshr_ta_dev.gld.tth_and_tts
 --
--- La vue source raw_data.silver_time_to_shortlist_gbs_1 contient les candidatures,
+-- La vue source gbshr_ta_dev.slv.fr_time_to_shortlist contient les candidatures,
 -- les réquisitions et les données organisationnelles enrichies.
 --
 -- Correction appliquée:
@@ -25,7 +25,7 @@
 -- L'ancienne expectation Application ID = 1 n'est pas reproduite:
 --   la règle fonctionnelle attendue est rownumber = 1 dans la branche Shortlist.
 
-CREATE OR REFRESH MATERIALIZED VIEW `gld`.`bronze_final_dataset_tth_and_tts`
+CREATE OR REFRESH MATERIALIZED VIEW `gbshr_ta_dev`.`gld`.`tth_and_tts`
 
 COMMENT 'Migrated from Dataiku (Final_dataset_TTH_and_TTS)'
 
@@ -74,7 +74,7 @@ CAST(
   ) AS BIGINT
 ) AS `rownumber`
 
-  FROM `raw_data`.`silver_time_to_shortlist_gbs_1`
+  FROM `gbshr_ta_dev`.`slv`.`fr_time_to_shortlist`
 
   -- Correction:
   -- le statut est recherché dans Application Status,
@@ -142,7 +142,7 @@ SELECT
   `Smart Code ID 1.0`,
   `Smart Code Name 1.0`
 
-FROM `raw_data`.`silver_time_to_shortlist_gbs_1`
+FROM `gbshr_ta_dev`.`slv`.`fr_time_to_shortlist`
 
 -- Correction:
 -- le statut est recherché dans Application Status,

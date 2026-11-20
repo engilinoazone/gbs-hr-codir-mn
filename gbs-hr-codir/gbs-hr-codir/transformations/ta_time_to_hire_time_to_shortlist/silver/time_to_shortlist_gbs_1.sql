@@ -5,7 +5,7 @@
 --   compute_Time_to_Hire_w_blank_joined_1
 --
 -- Target:
---   raw_data.silver_time_to_shortlist_gbs_1
+--   gbshr_ta_dev.slv.fr_time_to_shortlist
 --
 -- Principales règles reproduites:
 --   1. Déduplication des réquisitions avant la jointure.
@@ -28,7 +28,7 @@
 --     avant la jointure avec les candidatures.
 
 CREATE OR REFRESH MATERIALIZED VIEW
-`raw_data`.`silver_time_to_shortlist_gbs_1`
+`gbshr_ta_dev`.`slv`.`fr_time_to_shortlist`
 
 COMMENT 'Migrated from Dataiku (Time_to_Shortlist_GBS_1)'
 

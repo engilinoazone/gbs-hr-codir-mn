@@ -1,6 +1,7 @@
 -- Migrated from Dataiku: compute_ds_deploiement_for_KPI_V2_2026_prepared1, compute_ds_deploiement_for_KPI_V2_2026_prepared1_distinct, compute_ds_deploiement_for_KPI_V2_2026_prepared, compute_ds_deploiement_for_KPI_V2_2026_prepared_joined, compute_ds_deploiement_for_KPI_V2_final_2026
-CREATE OR REFRESH MATERIALIZED VIEW `raw_data`.`gold_ds_deploiement_for_kpi_v2_final_2026`
+CREATE OR REFRESH MATERIALIZED VIEW `gbshr_training_dev`.`gld`.`fr_deploiement_for_kpi_v2_final_2026`
 COMMENT 'Migrated from Dataiku (ds_deploiement_for_KPI_V2_final_2026)'
+TBLPROPERTIES ('delta.columnMapping.mode' = 'name')
 AS
 WITH
 -- Dataiku shaker `compute_ds_deploiement_for_KPI_V2_2026_prepared1`: record-context column `Date Extraction`
@@ -128,7 +129,7 @@ _compute_ds_deploiement_for_kpi_v2_2026_prepared1 AS (
     `Territoire`,
     `Domaine parent`,
     `Domaine`
- FROM hr_gbs_dev.raw_data.bronze_ds_deploiement_for_kpi_v2_2026
+ FROM gbshr_training_dev.brz.fr_deploiement_for_kpi_v2_2026
 ),
 
 -- Dataiku distinct `compute_ds_deploiement_for_KPI_V2_2026_prepared1_distinct`: dedup across all recipe key columns.
@@ -184,6 +185,6 @@ SELECT
   'France' AS `Country`
 FROM _compute_ds_deploiement_for_kpi_v2_2026_prepared AS deployment
 
-LEFT JOIN hr_gbs_dev.raw_data.silver_pdc_consolide_prepared_by_entit_de_regroupement AS pdc
+LEFT JOIN gbshr_training_dev.slv.fr_pdc_consolide_prepared_by_entit_de_regroupement AS pdc
   ON deployment.`Entité de regroupement`
    = pdc.`Entité de regroupement`;

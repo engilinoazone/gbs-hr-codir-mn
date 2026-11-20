@@ -1,8 +1,9 @@
 -- Migrated from Dataiku: compute_PDC_consolide_prepared, compute_PDC_consolide_prepared_by_Entit_de_regroupement
-CREATE OR REFRESH MATERIALIZED VIEW `raw_data`.`silver_pdc_consolide_prepared_by_entit_de_regroupement` (
+CREATE OR REFRESH MATERIALIZED VIEW `gbshr_training_dev`.`slv`.`fr_pdc_consolide_prepared_by_entit_de_regroupement` (
   CONSTRAINT entit_de_regroupement_present EXPECT (`Entité de regroupement` IS NOT NULL)
 )
 COMMENT 'Migrated from Dataiku (PDC_consolide_prepared_by_Entit_de_regroupement)'
+TBLPROPERTIES ('delta.columnMapping.mode' = 'name')
 AS
 WITH
 -- Dataiku shaker `compute_PDC_consolide_prepared`: select required columns and replace the ERES entity value
